@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="root"> </div>
+    <script type="text/babel">
+
+    let Add = () => {
+        let [Counter,CreateCounter] = React.useState([]);
+
+        let createHandler = () => {
+            CreateCounter([...Counter,{
+                id: Math.random()*1000
+            }])
+            //console.log(Counter)
+        }
+
+       return(
+           <div>
+             <button onClick={createHandler} id='Add' className='btn btn-primary'>Add Counter</button>
+             <div className="container">
+               <div className="row">
+                {Counter.map(element => (
+                 <App Counter={Counter} CreateCounter={CreateCounter} key={element.id} element={element} />
+                 ))
+
+                }
+                </div>   
+             </div>
+             
+            
+           </div>
+           
+       )
+    }
+     
+    let App = ({Counter,CreateCounter,element}) => {
+        let [Input,SetInput] = React.useState(0)
+        
+        let Increment = () => {
+            SetInput(previnput => previnput + 1)
+        }
+
+        let Decrement = () => {
+            SetInput(previnput => previnput - 1)
+        }
+
+        let DeleteHandler = () => {
+          CreateCounter(Counter.filter( item => item.id != element.id))
+          
+         
+        }
+               
+
+        return(
+            <div id='bg' className='col-lg-4 col-md-4 col-sm-12'> 
+             <h1>{Input}</h1>   
+             <button onClick={Increment} className='btn btn-dark mr-3 btn-lg px-4'>+</button>
+             <button onClick={Decrement} className='btn btn-light btn-lg px-4 mr-3'>-</button>
+             <button onClick={DeleteHandler} className='btn btn-outline-danger'><i className="fas fa-trash px-2 py-2"></i></button>
+            </div>
+        )
+    }
+
+
+    ReactDOM.render( <Add />, document.getElementById('root') )
+    </script>
+</body>
+</html>

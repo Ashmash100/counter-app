@@ -1,0 +1,18 @@
+body {
+    text-align: center;
+    background-color: rgb(216, 216, 216);
+}
+
+h1 {
+   
+    font-size: 5em;
+}
+
+#bg {
+    margin-top: 2em;
+    
+}
+
+#Add {
+    margin-top: 3em;
+}
